@@ -1,14 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SamisController : MonoBehaviour
 {
-    [SerializeField] float playerSpeed = 5f;  //sets player speed
+    [SerializeField] float _playerSpeed = 5f;  //sets player speed
+
     public Rigidbody2D _rb; //sets up variable for rigid body
     public Vector2 _move;//sets up the player movement
+    public bool _freeze;
     //to set the specific game object to manipulate
-    public GameObject _saveInteract;
+    public GameObject _speekInteract;
+    public GameObject _lookInteract;
+    public GameObject _useInteract;
+    public GameObject _openInteract;
 
 
     // Start is called before the first frame update
@@ -19,24 +25,68 @@ public class SamisController : MonoBehaviour
     }
 
 
-    //executes when player leaves a trigger area 
-    private void OnTriggerExit2D(Collider2D collision)
+    //executes when player enters a trigger area 
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        //removes talk indicator(specifically for the save trigger)
-        if (collision.gameObject.name == "saveTrig")
+        //adds talk indicator above player
+        if (collision.gameObject.tag == "talk")
         {
-            _saveInteract.SetActive(false);
+            _speekInteract.SetActive(true);
+        }
+        //adds look indicator above player
+        if (collision.gameObject.tag == "look")
+        {
+            _lookInteract.SetActive(true);
+        }
+        //adds use indicator above player
+        if (collision.gameObject.tag == "use")
+        {
+            _useInteract.SetActive(true);
+        }
+        //adds open(for doors) indicator above player
+        if (collision.gameObject.tag == "open")
+        {
+            _openInteract.SetActive(true);
+        }
+
+        //stops player from moving while in the freeze trigger
+        if (collision.gameObject.name == "FreezeZ")
+        {
+            _freeze = true;
+            Debug.Log("you have entered freeze");
         }
     }
 
 
-    //executes when player enters a trigger area 
-    private void OnTriggerEnter2D(Collider2D collision)
+    //executes when player leaves a trigger area 
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        //adds talk indicator(specifically for the save trigger)
-        if (collision.gameObject.name == "saveTrig")
+        //hides talk indicator above player
+        if (collision.gameObject.tag == "talk")
         {
-            _saveInteract.SetActive(true);
+            _speekInteract.SetActive(false);
+        }
+        //hides look indicator above player
+        if (collision.gameObject.tag == "look")
+        {
+            _lookInteract.SetActive(false);
+        }
+        //hides use indicator above player
+        if (collision.gameObject.tag == "use")
+        {
+            _useInteract.SetActive(false);
+        }
+        //hides open(for doors) indicator above player
+        if (collision.gameObject.tag == "open")
+        {
+            _openInteract.SetActive(false);
+        }
+
+        //allows player to move again
+        if (collision.gameObject.name == "FreezeZ")
+        {
+            _freeze = false;
+            Debug.Log("you have left freeze");
         }
     }
 
@@ -44,15 +94,21 @@ public class SamisController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //checks for player movement
-        _move.x = Input.GetAxisRaw("Horizontal");
-        _move.y = Input.GetAxisRaw("Vertical");
+        if (!_freeze)
+        {
+            //checks for player movement
+            _move.x = Input.GetAxisRaw("Horizontal");
+            _move.y = Input.GetAxisRaw("Vertical");
+        }
     }
 
 
     //is called every 50 frames(better for physics stuffs)
     void FixedUpdate()
     {
-        _rb.MovePosition(_rb.position + _move * playerSpeed * Time.fixedDeltaTime);//actually changes your position
+        if (!_freeze)
+        {
+            _rb.MovePosition(_rb.position + _move * _playerSpeed * Time.fixedDeltaTime);//actually changes your position
+        }
     }
 }
