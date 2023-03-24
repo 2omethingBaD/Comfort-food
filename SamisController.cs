@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using AC;
 
 public class SamisController : MonoBehaviour
 {
@@ -10,6 +11,18 @@ public class SamisController : MonoBehaviour
     public Rigidbody2D _rb; //sets up variable for rigid body
     public Vector2 _move;//sets up the player movement
     public bool _freeze;
+    /*sets trigger object to stop action list from running when player exits the trigger
+     * (hopefully temporary until a shorter solution is found XP)*/
+    public GameObject _trig1;
+    public GameObject _trig2;
+    public GameObject _trig3;
+    public GameObject _trig4;
+    public GameObject _trig5;
+    public GameObject _trig6;
+    public GameObject _trig7;
+    public GameObject _trig8;
+    public GameObject _trig9;
+    public GameObject _trig10;
     //to set the specific game object to manipulate
     public GameObject _speekInteract;
     public GameObject _lookInteract;
@@ -65,21 +78,105 @@ public class SamisController : MonoBehaviour
         if (collision.gameObject.tag == "talk")
         {
             _speekInteract.SetActive(false);
+
+            _trig1.SetActive(false);
+            _trig1.SetActive(true);
+            _trig2.SetActive(false);
+            _trig2.SetActive(true);
+            _trig3.SetActive(false);
+            _trig3.SetActive(true);
+            _trig4.SetActive(false);
+            _trig4.SetActive(true);
+            _trig5.SetActive(false);
+            _trig5.SetActive(true);
+            _trig6.SetActive(false);
+            _trig6.SetActive(true);
+            _trig7.SetActive(false);
+            _trig7.SetActive(true);
+            _trig8.SetActive(false);
+            _trig8.SetActive(true);
+            _trig9.SetActive(false);
+            _trig9.SetActive(true);
+            _trig10.SetActive(false);
+            _trig10.SetActive(true);
         }
         //hides look indicator above player
         if (collision.gameObject.tag == "look")
         {
             _lookInteract.SetActive(false);
+
+            _trig1.SetActive(false);
+            _trig1.SetActive(true);
+            _trig2.SetActive(false);
+            _trig2.SetActive(true);
+            _trig3.SetActive(false);
+            _trig3.SetActive(true);
+            _trig4.SetActive(false);
+            _trig4.SetActive(true);
+            _trig5.SetActive(false);
+            _trig5.SetActive(true);
+            _trig6.SetActive(false);
+            _trig6.SetActive(true);
+            _trig7.SetActive(false);
+            _trig7.SetActive(true);
+            _trig8.SetActive(false);
+            _trig8.SetActive(true);
+            _trig9.SetActive(false);
+            _trig9.SetActive(true);
+            _trig10.SetActive(false);
+            _trig10.SetActive(true);
         }
         //hides use indicator above player
         if (collision.gameObject.tag == "use")
         {
             _useInteract.SetActive(false);
+
+            _trig1.SetActive(false);
+            _trig1.SetActive(true);
+            _trig2.SetActive(false);
+            _trig2.SetActive(true);
+            _trig3.SetActive(false);
+            _trig3.SetActive(true);
+            _trig4.SetActive(false);
+            _trig4.SetActive(true);
+            _trig5.SetActive(false);
+            _trig5.SetActive(true);
+            _trig6.SetActive(false);
+            _trig6.SetActive(true);
+            _trig7.SetActive(false);
+            _trig7.SetActive(true);
+            _trig8.SetActive(false);
+            _trig8.SetActive(true);
+            _trig9.SetActive(false);
+            _trig9.SetActive(true);
+            _trig10.SetActive(false);
+            _trig10.SetActive(true);
         }
         //hides open(for doors) indicator above player
         if (collision.gameObject.tag == "open")
         {
             _openInteract.SetActive(false);
+
+            _trig1.SetActive(false);
+            _trig1.SetActive(true);
+            _trig2.SetActive(false);
+            _trig2.SetActive(true);
+            _trig3.SetActive(false);
+            _trig3.SetActive(true);
+            _trig4.SetActive(false);
+            _trig4.SetActive(true);
+            _trig5.SetActive(false);
+            _trig5.SetActive(true);
+            _trig6.SetActive(false);
+            _trig6.SetActive(true);
+            _trig7.SetActive(false);
+            _trig7.SetActive(true);
+            _trig8.SetActive(false);
+            _trig8.SetActive(true);
+            _trig9.SetActive(false);
+            _trig9.SetActive(true);
+            _trig10.SetActive(false);
+            _trig10.SetActive(true);
         }
 
         //allows player to move again
